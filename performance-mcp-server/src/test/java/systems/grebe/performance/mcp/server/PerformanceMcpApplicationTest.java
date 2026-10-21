@@ -35,6 +35,15 @@ class PerformanceMcpApplicationTest {
                 .singleElement().satisfies(s -> assertThat(s.tool().annotations().readOnlyHint()).isTrue());
     }
 
+    @Autowired
+    PerformanceProperties properties;
+
+    @Test
+    void debuggerMayAttachToAnyHost() {
+        assertThat(properties.java().debugHosts()).isEqualTo(".*");
+        assertThat(properties.javaSettings().debugHosts()).isEqualTo(".*");
+    }
+
     @Test
     void instructionsMentionEveryArea() {
         String text = Instructions.build(tools.areas());

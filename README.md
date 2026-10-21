@@ -107,7 +107,7 @@ Kurz: `claude mcp add --transport http performance http://127.0.0.1:8765/mcp`.
 | `performance.java.exclude-processes` | IntelliJ, Gradle-Daemon, JetBrains | Regex für auszuschließende JVMs |
 | `performance.java.jmx-targets` | – | Liste `alias=host:port`, ansprechbar als `jmx:<alias>` |
 | `performance.java.jmx-user` / `jmx-password` | – | JMX-Zugangsdaten |
-| `performance.java.debug-hosts` | `localhost\|127\.0\.0\.1` | Regex für Hosts, an deren JDWP-Port sich der Debugger hängen darf |
+| `performance.java.debug-hosts` | `.*` (alle) | Regex für Hosts, an deren JDWP-Port sich der Debugger hängen darf |
 | `performance.java.allow-invasive` | `true` | Heap-Dumps, GC erzwingen, freie jcmd-Befehle |
 | `performance.java.max-output-lines` | `400` | Begrenzung der Tool-Ausgaben |
 | `performance.java.exclude-self` | `true` | Die Server-JVM selbst nicht als Ziel anbieten |

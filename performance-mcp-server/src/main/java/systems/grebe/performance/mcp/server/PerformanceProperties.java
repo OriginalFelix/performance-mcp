@@ -39,7 +39,7 @@ public record PerformanceProperties(Path home,
                        List<String> jmxTargets,
                        String jmxUser,
                        String jmxPassword,
-                       @DefaultValue(JavaSettings.DEFAULT_DEBUG_HOSTS) String debugHosts,
+                       @DefaultValue(".*") String debugHosts,
                        @DefaultValue("true") boolean allowInvasive,
                        @DefaultValue("400") int maxOutputLines,
                        @DefaultValue("true") boolean excludeSelf) {
