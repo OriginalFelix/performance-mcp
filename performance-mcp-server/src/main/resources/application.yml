@@ -46,7 +46,7 @@ performance:
     max-artifacts: 50
     # include-processes:         # Regex auf Hauptklasse/Kommandozeile, leer = alle JVMs des Benutzers
     # jmx-targets: test=srv01:9010,prod=srv02:9010
-    debug-hosts: localhost|127\.0\.0\.1
+    debug-hosts: ".*"                 # Regex, Standard: alle Hosts
     allow-invasive: true
     max-output-lines: 400
     exclude-self: true
