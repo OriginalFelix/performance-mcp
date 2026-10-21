@@ -1,0 +1,9 @@
+# Profil "stdio": MCP über Standard-Ein-/Ausgabe (vom Client als Kindprozess gestartet) statt HTTP.
+# stdout gehört dem Protokoll – Logs gehen nach stderr (siehe logback-spring.xml).
+spring:
+  main:
+    web-application-type: none
+  ai:
+    mcp:
+      server:
+        stdio: true

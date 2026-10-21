@@ -1,0 +1,452 @@
+{
+  "build.gradle.kts": {
+    "mtime": 1792602140.0673692,
+    "seen": 1792602637.9619765,
+    "ast_hash": "8bbc93155e60d71c87b828b0f76c40a2",
+    "semantic_hash": ""
+  },
+  "container4j/build.gradle.kts": {
+    "mtime": 1792601908.1438236,
+    "seen": 1792602637.9619818,
+    "ast_hash": "7d1fa228df5440dba722ded7634d8787",
+    "semantic_hash": ""
+  },
+  "container4j/gradlew": {
+    "mtime": 1792601908.1458237,
+    "seen": 1792602637.961985,
+    "ast_hash": "a43be8432bac3ffd05b3769aa42fe996",
+    "semantic_hash": ""
+  },
+  "container4j/settings.gradle.kts": {
+    "mtime": 1792601908.1458237,
+    "seen": 1792602637.9619877,
+    "ast_hash": "ccb6a4c0162d55b896d4fae8f858a864",
+    "semantic_hash": ""
+  },
+  "container4j/src/main/java/systems/grebe/container4j/ContainerRuntime.java": {
+    "mtime": 1792601908.1468236,
+    "seen": 1792602637.9619906,
+    "ast_hash": "7fc1ec5aee0ef5432669d651de69c725",
+    "semantic_hash": ""
+  },
+  "container4j/src/main/java/systems/grebe/container4j/cli/CliContainerRuntime.java": {
+    "mtime": 1792601908.1478238,
+    "seen": 1792602637.9619932,
+    "ast_hash": "eae2a0cea523dbd6bddf0259ce22caf8",
+    "semantic_hash": ""
+  },
+  "container4j/src/main/java/systems/grebe/container4j/cli/DockerRuntime.java": {
+    "mtime": 1792601908.1478238,
+    "seen": 1792602637.961996,
+    "ast_hash": "a76e747007bcb035fac6e4c0699a1670",
+    "semantic_hash": ""
+  },
+  "container4j/src/main/java/systems/grebe/container4j/cli/PodmanRuntime.java": {
+    "mtime": 1792601908.1478238,
+    "seen": 1792602637.9619997,
+    "ast_hash": "8e8f696a57fa1e2d2a3d64d0175f266a",
+    "semantic_hash": ""
+  },
+  "container4j/src/main/java/systems/grebe/container4j/cli/ProcessRunner.java": {
+    "mtime": 1792601908.1478238,
+    "seen": 1792602637.9620023,
+    "ast_hash": "0d2b86dbc5742b663b88cec926cb5c55",
+    "semantic_hash": ""
+  },
+  "container4j/src/main/java/systems/grebe/container4j/cli/package-info.java": {
+    "mtime": 1792601908.1478238,
+    "seen": 1792602637.9620044,
+    "ast_hash": "5339aa95e9afd5d7221de6fe5656ed63",
+    "semantic_hash": ""
+  },
+  "container4j/src/main/java/systems/grebe/container4j/package-info.java": {
+    "mtime": 1792601908.1488237,
+    "seen": 1792602637.9620063,
+    "ast_hash": "4567fb8bf1418b07b52c65bc1c891030",
+    "semantic_hash": ""
+  },
+  "container4j/src/test/java/systems/grebe/container4j/cli/CliContainerRuntimeTest.java": {
+    "mtime": 1792601908.1488237,
+    "seen": 1792602637.9620087,
+    "ast_hash": "4b1a5ab91a7daeac5ac5c52728d10442",
+    "semantic_hash": ""
+  },
+  "gradlew": {
+    "mtime": 1792601908.196825,
+    "seen": 1792602637.962011,
+    "ast_hash": "a43be8432bac3ffd05b3769aa42fe996",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/build.gradle.kts": {
+    "mtime": 1792602140.0703692,
+    "seen": 1792602637.9620132,
+    "ast_hash": "e52c7576cbef41d99235ea65b5d2afd0",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/PerformanceArea.java": {
+    "mtime": 1792602118.307755,
+    "seen": 1792602637.962015,
+    "ast_hash": "63500846d51e4bd8d6b30d82f17646d3",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/PerformanceTools.java": {
+    "mtime": 1792602118.310755,
+    "seen": 1792602637.962017,
+    "ast_hash": "6eb3e7a97b8c2c80b624da4530c3b9b0",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/asprof/AsprofInstaller.java": {
+    "mtime": 1792602118.304755,
+    "seen": 1792602637.962019,
+    "ast_hash": "ab3403fedbd513e4bd12c0383ecf3474",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/asprof/AsyncProfilerTools.java": {
+    "mtime": 1792602053.109915,
+    "seen": 1792602637.962021,
+    "ast_hash": "1bc6ba109ec06281a83c04a487b88221",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/container/CliContainerAccess.java": {
+    "mtime": 1792602030.7762847,
+    "seen": 1792602637.9620233,
+    "ast_hash": "53e8b0d9fb26cf97f365ff5b2ff3e062",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/container/ContainerAccess.java": {
+    "mtime": 1792602030.7712846,
+    "seen": 1792602637.962025,
+    "ast_hash": "d6a7005095dedd3bab0259327150a53d",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/debug/DebugSession.java": {
+    "mtime": 1792601971.4486103,
+    "seen": 1792602637.9620273,
+    "ast_hash": "b517f5fa0413bb088d6131c689b9f7a9",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/debug/DebugSessions.java": {
+    "mtime": 1792602053.110915,
+    "seen": 1792602637.9620292,
+    "ast_hash": "15c97a8aa204aae2b7a105ee659db620",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/debug/DebugTools.java": {
+    "mtime": 1792602053.110915,
+    "seen": 1792602637.9620318,
+    "ast_hash": "f7efd3b0ffc972a78a6d3d7860a477cb",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/java/ArtifactStore.java": {
+    "mtime": 1792601971.44061,
+    "seen": 1792602637.962034,
+    "ast_hash": "ee856704a08d20ac7441ba72e21b36f7",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/java/Containers.java": {
+    "mtime": 1792602053.104915,
+    "seen": 1792602637.962036,
+    "ast_hash": "3ad9cee64ea34c3b0caacc6642b456e0",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/java/IdleFrames.java": {
+    "mtime": 1792601971.43861,
+    "seen": 1792602637.962038,
+    "ast_hash": "ec1e2378ec3d4fdd17fcced750c6cbc5",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/java/JavaEnvironment.java": {
+    "mtime": 1792602070.0013916,
+    "seen": 1792602637.9620397,
+    "ast_hash": "3d0abc563333c353e18e255990ff5ff6",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/java/JvmTarget.java": {
+    "mtime": 1792601971.43961,
+    "seen": 1792602637.962042,
+    "ast_hash": "d0525eed43f9828eb2e2add766b37c91",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/java/LocalJvms.java": {
+    "mtime": 1792602053.1059148,
+    "seen": 1792602637.9620442,
+    "ast_hash": "0af9d8b0e9803704d4a6092b93ee8bb8",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/java/StackProfile.java": {
+    "mtime": 1792601971.44061,
+    "seen": 1792602637.9620461,
+    "ast_hash": "a87bbed1bb0ebe3868a8ce97d5ea5c7e",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/java/ToolDownloads.java": {
+    "mtime": 1792602053.1059148,
+    "seen": 1792602637.9620483,
+    "ast_hash": "34a312524a46f73e2f21d7a79c7fe6fb",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/jfr/JfrAnalyzer.java": {
+    "mtime": 1792601971.44561,
+    "seen": 1792602637.96205,
+    "ast_hash": "d868d99bfa563aee91d38f7299b29511",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/jfr/JfrTools.java": {
+    "mtime": 1792602053.1089149,
+    "seen": 1792602637.9620523,
+    "ast_hash": "0db65d0132645991619f26843f104fb5",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/jvm/JvmInvasiveTools.java": {
+    "mtime": 1792602053.1089149,
+    "seen": 1792602637.9620545,
+    "ast_hash": "5c6b7bd86d4a3cae23dd15c1d69fef6c",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/jvm/JvmTools.java": {
+    "mtime": 1792602053.107915,
+    "seen": 1792602637.9620566,
+    "ast_hash": "7332b11d434be8185146249f9d460c16",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/jvm/ThreadDumpAnalyzer.java": {
+    "mtime": 1792601971.44461,
+    "seen": 1792602637.9620588,
+    "ast_hash": "d47cd2cf343fcc68e38538d678ee7432",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/settings/AsprofSettings.java": {
+    "mtime": 1792602030.7572842,
+    "seen": 1792602637.9620605,
+    "ast_hash": "4ae191d19c96d38bf7fa13512a3deed5",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/settings/ContainerSettings.java": {
+    "mtime": 1792602030.7672844,
+    "seen": 1792602637.9620626,
+    "ast_hash": "87378df6eac1664bfb7ff8c8a2d355b9",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/settings/DebugSettings.java": {
+    "mtime": 1792602030.7632842,
+    "seen": 1792602637.9620647,
+    "ast_hash": "214e347cc95628f4891a4f21083670d7",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/settings/JavaSettings.java": {
+    "mtime": 1792602030.7482839,
+    "seen": 1792602637.9620667,
+    "ast_hash": "020e7d3b99115dcdca4ceca3e12c1b92",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/settings/JfrSettings.java": {
+    "mtime": 1792602030.755284,
+    "seen": 1792602637.9620688,
+    "ast_hash": "2209645fec6cfe26774d71ed5e715f24",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/settings/JvmSettings.java": {
+    "mtime": 1792602030.752284,
+    "seen": 1792602637.9620705,
+    "ast_hash": "fc226bf16b7f40ab956a3305eaefacb8",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/settings/VisualVmSettings.java": {
+    "mtime": 1792602030.7592843,
+    "seen": 1792602637.9620728,
+    "ast_hash": "2b6c15343f81f1a1aeb485a0f9f74005",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/support/CommandRunner.java": {
+    "mtime": 1792601971.4326098,
+    "seen": 1792602637.9620786,
+    "ast_hash": "78d6a3d90e41350a2aa2545a4f894246",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/support/ShellHints.java": {
+    "mtime": 1792601971.4336097,
+    "seen": 1792602637.9620805,
+    "ast_hash": "eb012eb7ffe6fb27b469bf153b98857a",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/support/Text.java": {
+    "mtime": 1792601971.4316099,
+    "seen": 1792602637.9620826,
+    "ast_hash": "57574b6b6ab0f0201b0540906f309f95",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/tool/ToolBeans.java": {
+    "mtime": 1792602070.009392,
+    "seen": 1792602637.9620845,
+    "ast_hash": "0ca02669a6c72f4d51eebbc0568cb159",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/tool/ToolHints.java": {
+    "mtime": 1792602070.007392,
+    "seen": 1792602637.9620867,
+    "ast_hash": "b355047baf68ebea0fb920919083bee9",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/visualvm/HeapAnalyzer.java": {
+    "mtime": 1792601971.43461,
+    "seen": 1792602637.9620886,
+    "ast_hash": "32ffaedb2c9ea9f760f705dc09a56616",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/visualvm/JmxCpuSampler.java": {
+    "mtime": 1792601971.43661,
+    "seen": 1792602637.9620907,
+    "ast_hash": "d15f8f69bc485e3b4e1eacd9592b7078",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/visualvm/VisualVmLauncher.java": {
+    "mtime": 1792602083.2507656,
+    "seen": 1792602637.9620929,
+    "ast_hash": "5ea709901cc3dd94bab4f37e8efa501c",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/main/java/systems/grebe/performance/mcp/visualvm/VisualVmTools.java": {
+    "mtime": 1792602237.5141194,
+    "seen": 1792602637.9620945,
+    "ast_hash": "b876777ac4d08f04fb5db4757442094c",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/test/java/systems/grebe/performance/mcp/PerformanceToolsTest.java": {
+    "mtime": 1792602523.1001794,
+    "seen": 1792602637.9620967,
+    "ast_hash": "cff2c1183f73fdc5bc9f214337706f6e",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/test/java/systems/grebe/performance/mcp/asprof/AsyncProfilerContainerTest.java": {
+    "mtime": 1792602260.599771,
+    "seen": 1792602637.9620986,
+    "ast_hash": "2d0b23aceff7baf260e6de1f40abbf9c",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/test/java/systems/grebe/performance/mcp/debug/DebugToolsTest.java": {
+    "mtime": 1792602260.599771,
+    "seen": 1792602637.9621007,
+    "ast_hash": "dee902cbadb3a1f0b1108d639e4c34ef",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/test/java/systems/grebe/performance/mcp/jfr/JfrToolsTest.java": {
+    "mtime": 1792601971.4276097,
+    "seen": 1792602637.9621031,
+    "ast_hash": "4519be326056415253597bf7833e546a",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/test/java/systems/grebe/performance/mcp/jvm/JvmToolsTest.java": {
+    "mtime": 1792601971.4276097,
+    "seen": 1792602637.962105,
+    "ast_hash": "11999e448377636d7685d34353d04a75",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/test/java/systems/grebe/performance/mcp/testjvm/Fixture.java": {
+    "mtime": 1792602260.597771,
+    "seen": 1792602637.9621072,
+    "ast_hash": "2c0f40a3d92c56a3b4f338825b8c318f",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/test/java/systems/grebe/performance/mcp/testjvm/FixtureApp.java": {
+    "mtime": 1792601971.4296098,
+    "seen": 1792602637.9621093,
+    "ast_hash": "07042614c178835da6f7e260b41a1740",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/test/java/systems/grebe/performance/mcp/visualvm/VisualVmToolsTest.java": {
+    "mtime": 1792602260.5987709,
+    "seen": 1792602637.9621112,
+    "ast_hash": "4674f799c4a0513a27f13412e7311cf9",
+    "semantic_hash": ""
+  },
+  "performance-mcp-server/build.gradle.kts": {
+    "mtime": 1792602171.8332658,
+    "seen": 1792602637.9621134,
+    "ast_hash": "62c335428e49fa22003bb7be3f819ead",
+    "semantic_hash": ""
+  },
+  "performance-mcp-server/src/main/java/systems/grebe/performance/mcp/server/Instructions.java": {
+    "mtime": 1792602429.21853,
+    "seen": 1792602637.962115,
+    "ast_hash": "22fa800b39e003a9c1efaf1f7f4f94d3",
+    "semantic_hash": ""
+  },
+  "performance-mcp-server/src/main/java/systems/grebe/performance/mcp/server/PerformanceConfiguration.java": {
+    "mtime": 1792602429.2115297,
+    "seen": 1792602637.9621172,
+    "ast_hash": "12bdc51a0c1fc3c162d45998cf7d8f07",
+    "semantic_hash": ""
+  },
+  "performance-mcp-server/src/main/java/systems/grebe/performance/mcp/server/PerformanceMcpApplication.java": {
+    "mtime": 1792602171.8372657,
+    "seen": 1792602637.962119,
+    "ast_hash": "2cb665947c35768e4a9bd25eef2233db",
+    "semantic_hash": ""
+  },
+  "performance-mcp-server/src/main/java/systems/grebe/performance/mcp/server/PerformanceProperties.java": {
+    "mtime": 1792602429.2075295,
+    "seen": 1792602637.9621212,
+    "ast_hash": "6902fee53f0a689e8606e52850124b97",
+    "semantic_hash": ""
+  },
+  "performance-mcp-server/src/main/java/systems/grebe/performance/mcp/server/PerformanceToolSet.java": {
+    "mtime": 1792602429.2145298,
+    "seen": 1792602637.9621236,
+    "ast_hash": "edb722a4630826f1ce1b9f17e47e7042",
+    "semantic_hash": ""
+  },
+  "performance-mcp-server/src/test/java/systems/grebe/performance/mcp/server/PerformanceMcpApplicationTest.java": {
+    "mtime": 1792602523.1051795,
+    "seen": 1792602637.9621255,
+    "ast_hash": "571b53aeef7c637452a72083db67bc9a",
+    "semantic_hash": ""
+  },
+  "settings.gradle.kts": {
+    "mtime": 1792602140.0653691,
+    "seen": 1792602637.9621277,
+    "ast_hash": "dd765eba2ca4400cf17c60d0163892c2",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1792602595.9822364,
+    "seen": 1792602637.9621294,
+    "ast_hash": "7fd929af85c1b1a8ddcdd8146a49ec90",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1792602632.1332567,
+    "seen": 1792602637.9621315,
+    "ast_hash": "8c36e45c38fcb00ebaa8316e4d80b8e0",
+    "semantic_hash": ""
+  },
+  "container4j/README.md": {
+    "mtime": 1792601908.1438236,
+    "seen": 1792602637.9621334,
+    "ast_hash": "5ae0472f5a97c56aa9ce311d9051ed34",
+    "semantic_hash": ""
+  },
+  "performance-mcp-core/src/test/resources/expected-tools.txt": {
+    "mtime": 1792602523.0961792,
+    "seen": 1792602637.9621356,
+    "ast_hash": "e38e144c98e49bd7f204ec74f919aa64",
+    "semantic_hash": ""
+  },
+  "performance-mcp-server/src/main/resources/application-stdio.yml": {
+    "mtime": 1792602429.2305303,
+    "seen": 1792602637.9621377,
+    "ast_hash": "762c82c76c78f6fb18233e48a5370ac7",
+    "semantic_hash": ""
+  },
+  "performance-mcp-server/src/main/resources/application.yml": {
+    "mtime": 1792602429.22653,
+    "seen": 1792602637.9621394,
+    "ast_hash": "daf20ca3f78a6001badb52ce0f8f6ee9",
+    "semantic_hash": ""
+  },
+  "performance-mcp-server/src/test/resources/expected-tools.txt": {
+    "mtime": 1792602523.1151798,
+    "seen": 1792602637.9621415,
+    "ast_hash": "e38e144c98e49bd7f204ec74f919aa64",
+    "semantic_hash": ""
+  }
+}

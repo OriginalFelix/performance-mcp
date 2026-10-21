@@ -1,0 +1,124 @@
+package systems.grebe.performance.mcp.visualvm;
+
+import java.io.DataInputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import systems.grebe.performance.mcp.settings.VisualVmSettings;
+import systems.grebe.performance.mcp.java.JavaEnvironment;
+import systems.grebe.performance.mcp.java.JvmTarget;
+import systems.grebe.performance.mcp.testjvm.Fixture;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+/** VisualVM-Engines gegen eine echte Fixture-JVM: Heap-Analyse (Leck finden) und CPU-Sampler über JMX. */
+class VisualVmToolsTest {
+
+    static Path artifacts;
+
+    static Fixture fixture;
+    static JavaEnvironment env;
+    static VisualVmTools tools;
+
+    @BeforeAll
+    static void start() throws Exception {
+        // kein @TempDir: die Heap-Engine hält ihren Index-Cache (memory-mapped) bis zum Ende der Test-JVM offen
+        artifacts = Files.createTempDirectory("performance-mcp-visualvm-test");
+        fixture = Fixture.start(true, false, false);
+        env = fixture.environment(artifacts);
+        tools = new VisualVmTools(() -> env, VisualVmSettings.defaults());
+    }
+
+    @AfterAll
+    static void stop() {
+        fixture.close();
+    }
+
+    @Test
+    void heapAnalysisFindsTheLeakAndItsRoot() {
+        JvmTarget t = env.target(null);
+        Path dump = t.heapDump(true, env.artifacts());
+        String out = tools.heapAnalyze(dump.getFileName().toString(), null, 10, 5, null);
+        assertThat(out).contains("Lebende Objekte").contains("byte[]");
+        // das Leck: HashMap an statischem Feld FixtureApp.CACHE hält ~30 MB
+        assertThat(out).contains("java.util.HashMap#").contains("static systems.grebe.performance.mcp.testjvm.FixtureApp.CACHE");
+
+        String filtered = tools.heapAnalyze(null, "testjvm", 5, 0, null);
+        assertThat(filtered).contains("FixtureApp").doesNotContain("größte Objekte nach zurückgehaltenem");
+
+        String hashMap = out.lines().filter(l -> l.contains("java.util.HashMap#")).findFirst().orElseThrow().trim();
+        String spec = hashMap.substring(hashMap.indexOf("java.util.HashMap#")).split("\\s")[0];
+        String detail = tools.heapAnalyze(null, null, null, null, spec);
+        assertThat(detail).contains("Felder:").contains("table =").contains("Pfad zur GC-Wurzel");
+    }
+
+    @Test
+    void parallelAnalysesOfTheSameDumpShareOneHeapOneAfterAnother() throws Exception {
+        // #95: zwei Heaps auf demselben Dump zerstören sich gegenseitig den Index-Cache (<dump>.hwcache) –
+        // gleichzeitige Aufrufe müssen sich einen Heap teilen und nacheinander darauf zugreifen
+        Path dump = env.target(null).heapDump(true, env.artifacts());
+        AtomicInteger active = new AtomicInteger();
+        AtomicInteger maxActive = new AtomicInteger();
+        Set<HeapAnalyzer> heaps = ConcurrentHashMap.newKeySet();
+        var pool = Executors.newFixedThreadPool(4);
+        try {
+            List<Future<String>> runs = new ArrayList<>();
+            for (int i = 0; i < 4; i++) {
+                runs.add(pool.submit(() -> HeapAnalyzer.analyze(dump, a -> {
+                    maxActive.accumulateAndGet(active.incrementAndGet(), Math::max);
+                    heaps.add(a);
+                    try {
+                        return a.overview(5, 3, null);
+                    } finally {
+                        active.decrementAndGet();
+                    }
+                })));
+            }
+            for (Future<String> run : runs) {
+                assertThat(run.get(5, TimeUnit.MINUTES)).contains("static systems.grebe.performance.mcp.testjvm.FixtureApp.CACHE");
+            }
+        } finally {
+            pool.shutdownNow();
+        }
+        assertThat(maxActive).hasValue(1);
+        assertThat(heaps).hasSize(1);
+        assertThat(dump.resolveSibling(dump.getFileName() + ".hwcache").resolve("dirty.lck")).doesNotExist();
+    }
+
+    @Test
+    void cpuSamplerOverJmxFindsHotMethodAndWritesNps() throws Exception {
+        String out = tools.sampleCpu(null, 3, null);
+        assertThat(out).contains("VisualVM-Sampler").contains("hotMethod").contains("Snapshot:");
+        assertThat(out).doesNotContain("Net.accept").doesNotContain("dumpThreads0");
+        Path nps = env.artifacts().latest("nps", null);
+        try (DataInputStream in = new DataInputStream(Files.newInputStream(nps))) {
+            byte[] magic = new byte[10];
+            in.readFully(magic);
+            assertThat(new String(magic)).isEqualTo("nBpRoFiLeR");
+            assertThat(in.readByte()).isEqualTo((byte) 1);
+            assertThat(in.readByte()).isEqualTo((byte) 2);
+            assertThat(in.readInt()).isEqualTo(1);
+        }
+        assertThat(tools.sampleCpu("jmx:fixture", 2, "testjvm")).contains("hotMethod");
+    }
+
+    @Test
+    void launcherRequiresConfiguration() {
+        var off = new VisualVmSettings(null, false, 20);
+        var launcher = new VisualVmLauncher(off, Path.of(System.getProperty("java.home")), env.downloads());
+        org.assertj.core.api.Assertions.assertThatThrownBy(launcher::executable).hasMessageContaining("nicht konfiguriert");
+        assertThat(List.of(".hprof", ".jfr")).isNotEmpty();
+    }
+}

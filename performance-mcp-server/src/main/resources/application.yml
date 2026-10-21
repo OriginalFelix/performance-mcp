@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: performance-mcp
+  main:
+    banner-mode: "off"
+  lifecycle:
+    # Graceful Shutdown wartet sonst bis zu 30 s auf offene MCP-Streams (SSE) verbundener Clients
+    timeout-per-shutdown-phase: 3s
+  ai:
+    mcp:
+      server:
+        name: performance-mcp
+        version: 0.1.0
+        type: SYNC
+        protocol: STREAMABLE
+        streamable-http:
+          mcp-endpoint: /mcp
+        capabilities:
+          tool: true
+          resource: false
+          prompt: false
+          completion: false
+        tool-change-notification: false
+        # Tool-Spezifikationen (mit MCP-Tool-Annotations) baut PerformanceConfiguration selbst
+        tool-callback-converter: false
+        annotation-scanner:
+          enabled: false
+        request-timeout: 15m
+
+server:
+  # Nur lokal erreichbar; für Zugriff von anderen Rechnern z.B. SERVER_ADDRESS=0.0.0.0 setzen (ohne Anmeldung!)
+  address: 127.0.0.1
+  port: 8765
+
+logging:
+  level:
+    root: INFO
+    io.modelcontextprotocol: WARN
+
+# Performance-/Debug-Tools. Alle Werte sind optional; hier die Standardwerte (Umgebungsvariablen: PERFORMANCE_JAVA_JMX_TARGETS …).
+performance:
+  # home: ~/.performance-mcp     # Artefakte (diagnostics/) und Werkzeug-Downloads (tools/)
+  java:
+    # jdk-home:                  # JDK für jcmd/Attach, leer = JDK des Servers
+    # artifact-dir:              # leer = <home>/diagnostics
+    max-artifacts: 50
+    # include-processes:         # Regex auf Hauptklasse/Kommandozeile, leer = alle JVMs des Benutzers
+    # jmx-targets: test=srv01:9010,prod=srv02:9010
+    debug-hosts: localhost|127\.0\.0\.1
+    allow-invasive: true
+    max-output-lines: 400
+    exclude-self: true

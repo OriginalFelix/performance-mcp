@@ -1,0 +1,18 @@
+# Gradle / Build
+/.gradle/
+build/
+/out/
+/bin/
+target/
+*.log
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# Spring Boot Devtools / lokale Ablage
+.env
+
+# graphify: nur der Cache bleibt lokal
+graphify-out/cache/
