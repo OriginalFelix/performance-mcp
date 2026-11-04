@@ -91,6 +91,9 @@ class AsyncProfilerContainerTest {
         String alloc = tools.profile("container:" + NAME, "alloc", 2, null, null);
         assertThat(alloc).contains("Allokationen-Profil");
 
+        String method = tools.profile("container:" + NAME, "Load.hot", 2, null, null);
+        assertThat(method).contains("Event Load.hot").contains("Methodenaufrufe-Profil").contains("Load.main");
+
         assertThat(tools.start("container:" + NAME, "cpu")).contains("gestartet");
         Thread.sleep(2000);
         assertThat(tools.stop("container:" + NAME, "cpu", null)).contains("Load.hot");

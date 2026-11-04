@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Supplier;
+import java.util.regex.Pattern;
 
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
@@ -20,7 +21,11 @@ import systems.grebe.performance.mcp.support.ShellHints;
 public class AsyncProfilerTools {
 
     private static final String TARGET = "Ziel: container:<name>[:<pid>] (unter Windows nötig) oder lokale PID/Name (Linux/macOS)";
-    private static final String EVENT = "cpu (Standard; im Container ohne perf-Rechte automatisch itimer), wall, alloc, lock";
+    private static final String EVENT = "cpu (Standard; im Container ohne perf-Rechte automatisch itimer), wall, alloc, lock "
+            + "oder ein Methoden-Event: Java-Methode als Klasse.methode (Platzhalter *, z.B. com.acme.Dao.find*) zählt deren "
+            + "Aufrufe mit Aufrufpfaden; unter Linux auch native Funktionen wie malloc";
+    /** Methoden-Event: Java-Klasse.methode mit Platzhaltern oder native Funktion; kein '-', damit nie eine Option. */
+    private static final Pattern METHOD_EVENT = Pattern.compile("[A-Za-z_$][\\w$.*<>]*");
 
     private final Supplier<JavaEnvironment> env;
     private final AsprofInstaller installer;
@@ -44,9 +49,9 @@ public class AsyncProfilerTools {
         JavaEnvironment e = env.get();
         JvmTarget t = e.target(target);
         int secs = seconds == null ? 30 : Math.max(1, Math.min(maxSeconds, seconds));
-        StackProfile.Kind kind = StackProfile.Kind.parse(event);
+        StackProfile.Kind kind = kind(event);
         Run run = Run.of(this, t);
-        List<String> args = new ArrayList<>(List.of("-d", String.valueOf(secs), "-e", run.event(kind), "-o", "jfr"));
+        List<String> args = new ArrayList<>(List.of("-d", String.valueOf(secs), "-e", run.event(kind, event), "-o", "jfr"));
         if (Boolean.TRUE.equals(perThread)) {
             args.add("-t");
         }
@@ -58,7 +63,7 @@ public class AsyncProfilerTools {
         Path jfr = run.fetchOutput();
         StackProfile.Result res = StackProfile.fromJfr(jfr, kind, include, null,
                 "async-profiler " + kind.name().toLowerCase(Locale.ROOT) + " – " + t.label(), e.artifacts());
-        return Text.limitLines(t.describe() + " – " + secs + " s, Event " + run.event(kind) + note + "\n"
+        return Text.limitLines(t.describe() + " – " + secs + " s, Event " + run.event(kind, event) + note + "\n"
                 + "JFR: " + jfr + "\nFlame Graph: " + res.flameGraph() + "\n\n" + res.profile().summary(20, 5, 14), e.maxLines());
     }
 
@@ -70,14 +75,14 @@ public class AsyncProfilerTools {
             @ToolParam(required = false, description = EVENT) String event) {
         JvmTarget t = env.get().target(target);
         Run run = Run.of(this, t);
-        StackProfile.Kind kind = StackProfile.Kind.parse(event);
+        StackProfile.Kind kind = kind(event);
         // JFR-Ausgabe muss bei async-profiler schon beim Start feststehen (wird fortlaufend geschrieben)
-        List<String> args = new ArrayList<>(List.of("start", "-e", run.event(kind), "-o", "jfr", "-f", run.sessionFile(true)));
+        List<String> args = new ArrayList<>(List.of("start", "-e", run.event(kind, event), "-o", "jfr", "-f", run.sessionFile(true)));
         CommandRunner.Result r = run.asprof(args, Duration.ofSeconds(60), false);
         if (!r.ok()) {
             throw new IllegalStateException("Start fehlgeschlagen: " + hint(r.output()));
         }
-        return t.describe() + ": Profiling gestartet (Event " + run.event(kind) + run.eventNote(kind) + "). Beenden mit asprof_stop.";
+        return t.describe() + ": Profiling gestartet (Event " + run.event(kind, event) + run.eventNote(kind) + "). Beenden mit asprof_stop.";
     }
 
     @Tool(name = "stop", description = "Beendet ein mit asprof_start gestartetes Profiling und liefert Auswertung + Flame Graph."
@@ -94,7 +99,7 @@ public class AsyncProfilerTools {
         if (!r.ok()) {
             throw new IllegalStateException("Stop fehlgeschlagen: " + hint(r.output()));
         }
-        StackProfile.Kind kind = StackProfile.Kind.parse(event);
+        StackProfile.Kind kind = kind(event);
         Path jfr = run.fetchSession(session);
         StackProfile.Result res = StackProfile.fromJfr(jfr, kind, include, null, null, e.artifacts());
         return Text.limitLines(t.describe() + "\nJFR: " + jfr + "\nFlame Graph: " + res.flameGraph() + "\n\n"
@@ -109,6 +114,18 @@ public class AsyncProfilerTools {
         String status = run.asprof(List.of("status"), Duration.ofSeconds(30), false).output().strip();
         String events = run.asprof(List.of("list"), Duration.ofSeconds(30), false).output().strip();
         return t.describe() + "\nStatus: " + status + "\n\n" + Text.limitLines(events, 60);
+    }
+
+    /** Profilart; unbekannte Namen, die wie eine Methode/Funktion aussehen, werden zum Methoden-Event. */
+    static StackProfile.Kind kind(String event) {
+        try {
+            return StackProfile.Kind.parse(event);
+        } catch (IllegalArgumentException ex) {
+            if (METHOD_EVENT.matcher(event.trim()).matches()) {
+                return StackProfile.Kind.METHOD;
+            }
+            throw ex;
+        }
     }
 
     private static String hint(String output) {
@@ -150,12 +167,13 @@ public class AsyncProfilerTools {
 
         abstract Path fetchSession(String session);
 
-        String event(StackProfile.Kind k) {
+        String event(StackProfile.Kind k, String raw) {
             return switch (k) {
                 case CPU -> "cpu";
                 case WALL -> "wall";
                 case ALLOC -> "alloc";
                 case LOCK -> "lock";
+                case METHOD -> raw.trim();
             };
         }
 
@@ -241,11 +259,11 @@ public class AsyncProfilerTools {
         }
 
         @Override
-        String event(StackProfile.Kind k) {
+        String event(StackProfile.Kind k, String raw) {
             if (k == StackProfile.Kind.CPU && !perf()) {
                 return "itimer";
             }
-            return super.event(k);
+            return super.event(k, raw);
         }
 
         @Override
