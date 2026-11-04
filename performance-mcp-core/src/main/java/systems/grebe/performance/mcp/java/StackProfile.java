@@ -29,7 +29,9 @@ public final class StackProfile {
         CPU("CPU", null, "Samples"),
         WALL("Wall-Clock", "--wall", "Samples"),
         ALLOC("Allokationen", "--alloc", "Bytes"),
-        LOCK("Lock-Konkurrenz", "--lock", "ns");
+        LOCK("Lock-Konkurrenz", "--lock", "ns"),
+        /** Instrumentierte Methode (async-profiler {@code -e Klasse.methode}): ein Sample je Aufruf, als ExecutionSample. */
+        METHOD("Methodenaufrufe", null, "Aufrufe");
 
         final String label;
         final String flag;
@@ -50,7 +52,8 @@ public final class StackProfile {
                 case "wall" -> WALL;
                 case "alloc", "allocation", "allocations", "memory" -> ALLOC;
                 case "lock", "locks", "monitor" -> LOCK;
-                default -> throw new IllegalArgumentException("Unbekannte Profilart '" + s + "' (cpu, wall, alloc, lock)");
+                case "method", "methods" -> METHOD;
+                default -> throw new IllegalArgumentException("Unbekannte Profilart '" + s + "' (cpu, wall, alloc, lock, method)");
             };
         }
     }
